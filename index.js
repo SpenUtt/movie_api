@@ -1,6 +1,15 @@
 const express = require('express'),
-    morgan = require('morgan');
+      fs = require("fs"),
+      path = require("path"),
+      morgan = require('morgan');
 const app = express();
+
+// Middlewares
+app.use(express.static('public'));
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
+app.use(morgan('common', {
+    stream: accessLogStream
+}));
 
 let topMovies = [
   {
@@ -47,11 +56,8 @@ let topMovies = [
 
 // GET requests
 
-app.use(express.static('public'));
-app.use(morgan('common'));
-
 app.get('/', (req, res) => {
-  res.send('Welcome to my movie app!');
+  res.send('Welcome to my movie app!!!');
 });
 
 app.get('/documentation', (req, res) => {                  
