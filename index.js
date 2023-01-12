@@ -54,6 +54,10 @@ let topMovies = [
   },  
 ];
 
+let users = [
+
+];
+
 // GET requests
 
 app.get('/', (req, res) => {
@@ -75,7 +79,7 @@ app.use((err, req, res, next) => {
 
 //get all movies 
 app.get('/movies', (req, res) => {
-  res.send('GET request - successfully returning data on all movies');
+  res.status(200).json(movies);
 });
 
 //Express Code
