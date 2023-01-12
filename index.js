@@ -73,6 +73,51 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something is not working, oops!');
 });
 
+//get all movies 
+app.get('/movies', (req, res) => {
+  res.send('GET request - successfully returning data on all movies');
+});
+
+//Express Code
+//return data on movies 
+app.get('/movies/:details', (req, res) => {
+  res.send('GET request - successfully returning details on selected movie');
+});
+
+//return data about genre
+app.get('/movies/genre/:details', (req, res) => {
+  res.send('successful GET request - returning details on genre');
+});
+
+//return data about director
+app.get('/movies/director/:details', (req, res) => {
+  res.send('GET request - returning details on genre');
+});
+
+//allow new users to register
+app.post('/users', (req, res) => {
+  res.send('POST request - user successfully registered');
+});
+
+//allow users to update their user info
+app.put('/users/:details', (req, res) => {
+  res.send('PUT request - user info successfully updated');
+});
+
+//allow users to add movie to favorites 
+app.post('/users/:favorites/:details', (req, res) => {
+  res.send('POST request - item successfully added to favorites list');
+});
+
+//allow users to remove movie from favorite list
+app.put('/users/:favorites/:details', (req, res) => {
+  res.send('PUT request - item successfully removed from favorites list');
+});
+
+//allow users to deregsiter
+app.delete('/users/:details/:deregister', (req, res) => {
+  res.send('DELETE request - user successfully deregistered');
+});
 
 // listen for requests
 app.listen(8080, () => {
