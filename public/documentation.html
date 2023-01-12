@@ -5,7 +5,122 @@
         <title>Documentation</title>
     </head>
     <body>
-        <h1>Movie API Project Documentation Page</h1>
-        <p>This project will present a movie API. It will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.</p>
+        <div>
+            <h1>Movie API Project Documentation Page</h1>
+            <p>This project will present a movie API. It will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.</p>
+        </div>
+        <div>
+            <h2>App Features</h2>
+            <ul>
+                <li>Return a list of all movies to the user</li>
+                <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user</li>
+                <li>Return data about a genre (description) by name/title (e.g., “Thriller”)</li>
+                <li>Return data about a director (bio, birth year, death year) by name</li>
+                <li>Allow new users to register</li>
+                <li>Allow users to update their user info(username)</li>
+                <li>Allow users to add a movie to their list of favorites, showing only a text that a movie has been added</li>
+                <li>Allow users to remove a movie from their list of favorites, showing only a text that a movie has been removed</li>
+                <li>Allow existing users to deregister, showing a text that a user email has been removed</li>
+            </ul>
+        </div>
+        <div>
+            <h2>Api Endpoints</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Business Logic</th>
+                        <th>URL</th>
+                        <th>HTTP Method</th>
+                        <th>QUERY Paramaters</th>
+                        <th>Request Body Data Format</th>
+                        <th>Response Body Data Format</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>Return a list of all movies to the user</td>
+                        <td>/movies</td>
+                        <td>Get</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user</td>
+                        <td>/movies/:details</td>
+                        <td>Get</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
+                        <td>/movies/genre/:details</td>
+                        <td>Get</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Return data about a director (bio, birth year, death year) by name</td>
+                        <td>/movies/director/:details</td>
+                        <td>Get</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Allow new users to register</td>
+                        <td>/users</td>
+                        <td>Post</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Allow users to update their user info(username)</td>
+                        <td>/users/:details</td>
+                        <td>Put</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+            
+            
+                    <tr>
+                        <td>Allow users to add a movie to their list of favorites, showing only a text that a movie has been added</td>
+                        <td>/users/:favorites/:details</td>
+                        <td>Post</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>A message indicating that a movie has been added</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Allow users to remove a movie from their list of favorites, showing only a text that a movie has been removed</td>
+                        <td>/users/:favorites/:details</td>
+                        <td>Put</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>A message indicating that a movie has been removed</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Allow existing users to deregister, showing a text that a user email has been removed</td>
+                        <td>/users/:details/:deregister</td>
+                        <td>Delete</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>A message indicating that the user account has been deleted</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
