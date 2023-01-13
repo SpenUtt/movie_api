@@ -49,7 +49,7 @@
             
                     <tr>
                         <td>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user</td>
-                        <td>/movies/:details</td>
+                        <td>/movies/:title/td>
                         <td>Get</td>
                         <td>-</td>
                         <td>-</td>
@@ -58,7 +58,7 @@
             
                     <tr>
                         <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-                        <td>/movies/genre/:details</td>
+                        <td>/movies/genre/:genreName</td>
                         <td>Get</td>
                         <td>-</td>
                         <td>-</td>
@@ -67,7 +67,7 @@
             
                     <tr>
                         <td>Return data about a director (bio, birth year, death year) by name</td>
-                        <td>/movies/director/:details</td>
+                        <td>/movies/director/:directorName</td>
                         <td>Get</td>
                         <td>-</td>
                         <td>-</td>
@@ -85,7 +85,7 @@
             
                     <tr>
                         <td>Allow users to update their user info(username)</td>
-                        <td>/users/:details</td>
+                        <td>/users/:id</td>
                         <td>Put</td>
                         <td>-</td>
                         <td>-</td>
@@ -95,7 +95,7 @@
             
                     <tr>
                         <td>Allow users to add a movie to their list of favorites, showing only a text that a movie has been added</td>
-                        <td>/users/:favorites/:details</td>
+                        <td>/users/:id/favorites</td>
                         <td>Post</td>
                         <td>-</td>
                         <td>-</td>
@@ -104,7 +104,7 @@
             
                     <tr>
                         <td>Allow users to remove a movie from their list of favorites, showing only a text that a movie has been removed</td>
-                        <td>/users/:favorites/:details</td>
+                        <td>/users/:id/favorites/:movieID</td>
                         <td>Put</td>
                         <td>-</td>
                         <td>-</td>
@@ -113,7 +113,7 @@
             
                     <tr>
                         <td>Allow existing users to deregister, showing a text that a user email has been removed</td>
-                        <td>/users/:details/:deregister</td>
+                        <td>/users/:id</td>
                         <td>Delete</td>
                         <td>-</td>
                         <td>-</td>

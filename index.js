@@ -72,29 +72,24 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something is not working, oops!');
-});
-
 //get all movies 
 app.get('/movies', (req, res) => {
   res.status(200).json(movies);
 });
 
 //Express Code
-//return data on movies 
-app.get('/movies/:details', (req, res) => {
+//return data on movies by title 
+app.get('/movies/:title', (req, res) => {
   res.send('GET request - successfully returning details on selected movie');
 });
 
 //return data about genre
-app.get('/movies/genre/:details', (req, res) => {
+app.get('/movies/genre/:genreName', (req, res) => {
   res.send('successful GET request - returning details on genre');
 });
 
 //return data about director
-app.get('/movies/director/:details', (req, res) => {
+app.get('/movies/directors/:directorName', (req, res) => {
   res.send('GET request - returning details on genre');
 });
 
@@ -104,23 +99,29 @@ app.post('/users', (req, res) => {
 });
 
 //allow users to update their user info
-app.put('/users/:details', (req, res) => {
+app.put('/users/:id', (req, res) => {
   res.send('PUT request - user info successfully updated');
 });
 
 //allow users to add movie to favorites 
-app.post('/users/:favorites/:details', (req, res) => {
+app.post('/users/:id/favorites/', (req, res) => {
   res.send('POST request - item successfully added to favorites list');
 });
 
 //allow users to remove movie from favorite list
-app.put('/users/:favorites/:details', (req, res) => {
+app.put('/users/:id/favorites/:movieID', (req, res) => {
   res.send('PUT request - item successfully removed from favorites list');
 });
 
 //allow users to deregsiter
-app.delete('/users/:details/:deregister', (req, res) => {
+app.delete('/users/:id/', (req, res) => {
   res.send('DELETE request - user successfully deregistered');
+});
+
+//Error 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something is not working, oops!');
 });
 
 // listen for requests
