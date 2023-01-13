@@ -1,7 +1,10 @@
+const bodyParser = require('body-parser');
 const express = require('express'),
       fs = require("fs"),
       path = require("path"),
-      morgan = require('morgan');
+      morgan = require('morgan'),
+      bodyParser = require('body-parser'),
+      uuid = require('uuid');
 const app = express();
 
 // Middlewares
