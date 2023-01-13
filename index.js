@@ -9,10 +9,13 @@ const app = express();
 
 // Middlewares
 app.use(express.static('public'));
+
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
 app.use(morgan('common', {
     stream: accessLogStream
 }));
+
+app.use(bodyParser.json());
 
 let topMovies = [
   {
