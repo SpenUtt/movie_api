@@ -51,27 +51,27 @@
                         <td>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user</td>
                         <td>/movies/:title</td>
                         <td>Get</td>
+                        <td>:title</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>A JSON object holding data about a single movie</td>
                     </tr>
             
                     <tr>
                         <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
                         <td>/movies/genre/:genreName</td>
                         <td>Get</td>
+                        <td>:name</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>A JSON object hodling data about the genre of a movie</td>
                     </tr>
             
                     <tr>
                         <td>Return data about a director (bio, birth year, death year) by name</td>
                         <td>/movies/director/:directorName</td>
                         <td>Get</td>
+                        <td>:name</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>A JSON ojbect holding data about the details of a director</td>
                     </tr>
             
                     <tr>
@@ -79,43 +79,43 @@
                         <td>/users</td>
                         <td>Post</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>A JSON object holding data about the users to add with the following structure: { "name" : "testname", "Password": "testpassword", "Email": "testemail@testdomain.com", "Birthday": "01.01.1995" } </td>
+                        <td>A JSON object holding data about the user that was added with the following structure: { "name" : "testname", "Password": "testpassword", "Email": "testemail@testdomain.com", "Birthday": "01.01.1995" } </td>
                     </tr>
             
                     <tr>
                         <td>Allow users to update their user info(username)</td>
                         <td>/users/:id</td>
                         <td>Put</td>
+                        <td>:id</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>A JSON object holding data about the updated information</td>
                     </tr>
             
             
                     <tr>
                         <td>Allow users to add a movie to their list of favorites, showing only a text that a movie has been added</td>
-                        <td>/users/:id/favorites</td>
+                        <td>/users/:id/favorites/:movieName</td>
                         <td>Post</td>
+                        <td>:id, :movieName</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>A message indicating that a movie has been added</td>
+                        <td>A JSON object holding data about the user and the movie that was added</td>
                     </tr>
             
                     <tr>
                         <td>Allow users to remove a movie from their list of favorites, showing only a text that a movie has been removed</td>
-                        <td>/users/:id/favorites/:movieID</td>
+                        <td>/users/:id/favorites/:movieName</td>
                         <td>Put</td>
+                        <td>:id, :movieName</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>A message indicating that a movie has been removed</td>
+                        <td>A JSON object holding data about the user and the movie that was removed</td>
                     </tr>
             
                     <tr>
                         <td>Allow existing users to deregister, showing a text that a user email has been removed</td>
                         <td>/users/:id</td>
                         <td>Delete</td>
-                        <td>-</td>
+                        <td>:id</td>
                         <td>-</td>
                         <td>A message indicating that the user account has been deleted</td>
                     </tr> 

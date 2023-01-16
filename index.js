@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express'),
       fs = require("fs"),
       path = require("path"),
@@ -20,43 +19,72 @@ app.use(bodyParser.json());
 let topMovies = [
   {
     title: 'Jurassic Park',
-    director: 'Steven Spielberg'
+    // commented section to be copied for next task 
+    //imageUrl: "https://filmspiegel-essen.de/wp-content/uploads/2020/07/JurassicPark_plakat2.jpg",
+    //description: "to be added",
+    director: {
+      name: 'Steven Spielberg',
+    },
+    //genre: {
+    //  name: 'adventure'
+    //}
   },
   {
     title: 'Lord of the Rings',
-    director: 'Peter Jackson'
+    director: {
+      name: 'Peter Jackson',
+    },
+    //genre: {
+    //  name: 'adventure'
+    //}
   },
   {
     title: 'Avatar',
-    director: 'James Cameron'
+    director: {
+      name: 'James Cameron',
+    },
   },
   {
     title: 'Star Wars',
-    director: 'George Lucas'
+    director: {
+      name: 'George Lucas',
+    },
   },
   {
     title: 'The Godfather',
-    director: 'Francis Ford Coppola'
+    director: {
+      name: 'Francis Ford Coppola',
+    },
   },
   {
     title: 'The Dark Knight',
-    director: 'Christopher Nolan'
+    director: {
+      name: 'Christopher Nolan',
+    },
   },
   {
     title: 'Fight Club',
-    director: 'David Fincher'
+    director: {
+      name: 'David Fincher',
+    },
   },
   {
     title: 'Pulp Fiction',
-    director: 'Quentin Tarantino'
+    director: {
+      name: 'Quentin Tarantino',
+    },
   },
   {
     title: 'Psycho',
-    director: 'Alfred Hitchcock'
+    director: {
+      name: 'Alfred Hitchcock',
+    },
   },
   {
     title: 'Goodfellas',
-    director: 'Martin Scorsese'
+    director: { 
+      name: 'Martin Scorsese'
+    },
   },  
 ];
 
@@ -65,6 +93,10 @@ let users = [
 ];
 
 // GET requests
+// 200 - For successfull GET
+// 201 - For successful create/update on server
+// 404 - Not found
+// 400 - Bad request
 
 app.get('/', (req, res) => {
   res.send('Welcome to my movie app!!!');
@@ -74,28 +106,34 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
-  res.json(topMovies);
-});
-
 //get all movies 
 app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
+  res.status(200).json(topMovies);
 });
 
 //Express Code
 //return data on movies by title 
 app.get('/movies/:title', (req, res) => {
-  res.send('GET request - successfully returning details on selected movie');
+  const title = req.params.title;
+  const result = topMovies.find(m => m.title === title)
+  if (result) {
+    return res.status(200).send(result);
+  }
+  return res.status(404).send("Movie you are looking for is not found!")
 });
 
 //return data about genre
 app.get('/movies/genre/:genreName', (req, res) => {
-  res.send('successful GET request - returning details on genre');
+  const genre = req.params.genreName;
+  const result = topMovies.filter(m => m.genre.name === genre)
+  if (result) {
+    return res.status(200).send(result);
+  }
+  return res.status(404).send("No Movies with the given genre!")
 });
 
 //return data about director
-app.get('/movies/directors/:directorName', (req, res) => {
+app.get('/movies/director/:directorName', (req, res) => {
   res.send('GET request - returning details on genre');
 });
 
@@ -110,12 +148,12 @@ app.put('/users/:id', (req, res) => {
 });
 
 //allow users to add movie to favorites 
-app.post('/users/:id/favorites/', (req, res) => {
+app.post('/users/:id/favorites/:movieName', (req, res) => {
   res.send('POST request - item successfully added to favorites list');
 });
 
 //allow users to remove movie from favorite list
-app.put('/users/:id/favorites/:movieID', (req, res) => {
+app.put('/users/:id/favorites/:movieName', (req, res) => {
   res.send('PUT request - item successfully removed from favorites list');
 });
 
