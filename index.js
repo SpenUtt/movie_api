@@ -25,23 +25,26 @@ let topMovies = [
     director: {
       name: 'Steven Spielberg',
     },
-    //genre: {
-    //  name: 'adventure'
-    //}
+    genre: {
+      name: 'to be added'
+    },
   },
   {
     title: 'Lord of the Rings',
     director: {
       name: 'Peter Jackson',
     },
-    //genre: {
-    //  name: 'adventure'
-    //}
+    genre: {
+      name: 'adventure'
+    },
   },
   {
     title: 'Avatar',
     director: {
       name: 'James Cameron',
+    },
+    genre: {
+      name: 'to be added'
     },
   },
   {
@@ -49,11 +52,17 @@ let topMovies = [
     director: {
       name: 'George Lucas',
     },
+    genre: {
+      name: 'to be added'
+    },
   },
   {
     title: 'The Godfather',
     director: {
       name: 'Francis Ford Coppola',
+    },
+    genre: {
+      name: 'to be added'
     },
   },
   {
@@ -61,11 +70,17 @@ let topMovies = [
     director: {
       name: 'Christopher Nolan',
     },
+    genre: {
+      name: 'to be added'
+    },
   },
   {
     title: 'Fight Club',
     director: {
       name: 'David Fincher',
+    },
+    genre: {
+      name: 'to be added'
     },
   },
   {
@@ -73,17 +88,26 @@ let topMovies = [
     director: {
       name: 'Quentin Tarantino',
     },
+    genre: {
+      name: 'to be added'
+    },
   },
   {
     title: 'Psycho',
     director: {
       name: 'Alfred Hitchcock',
     },
+    genre: {
+      name: 'to be added'
+    },
   },
   {
     title: 'Goodfellas',
     director: { 
       name: 'Martin Scorsese'
+    },
+    genre: {
+      name: 'to be added'
     },
   },  
 ];
@@ -134,7 +158,7 @@ app.get('/movies/genre/:genreName', (req, res) => {
 
 //return data about director
 app.get('/movies/director/:directorName', (req, res) => {
-  res.send('GET request - returning details on genre');
+  res.send('GET request - returning details on director');
 });
 
 //allow new users to register
