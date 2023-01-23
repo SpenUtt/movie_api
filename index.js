@@ -22,7 +22,7 @@ app.use(morgan('common', {
 }));
 
 app.use(bodyParser.json());
-
+//should the following two arrays be removed? 
 let topMovies = [
   {
     title: 'Jurassic Park',
@@ -130,7 +130,7 @@ let users = [
 // 400 - Bad request
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my movie app!!!');
+  res.send('Welcome to MyMovieApp!!!');
 });
 
 app.get('/documentation', (req, res) => {                  
@@ -169,28 +169,149 @@ app.get('/movies/director/:directorName', (req, res) => {
 });
 
 //allow new users to register
+// commented out from previous task to transition to mongoose 
+//app.post('/users', (req, res) => {
+//  res.send('POST request - user successfully registered');
+//});
+
+//Add a user
 app.post('/users', (req, res) => {
-  res.send('POST request - user successfully registered');
+  Users.findOne({ Username: req.body.Username })
+  .then((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + 'already exists');
+    } else {
+      Users
+        .create({
+          Username: req.body.Username,
+          Password: req.body.Password,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        })
+        .then((user) =>{res.status(201).json(user) })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
+});
+
+// Get all users
+app.get('/users', (req, res) => {
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// Get a user by username
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 //allow users to update their user info
-app.put('/users/:id', (req, res) => {
-  res.send('PUT request - user info successfully updated');
+// old code, to be removed? 
+//app.put('/users/:id', (req, res) => {
+//  res.send('PUT request - user info successfully updated');
+//});
+
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //allow users to add movie to favorites 
-app.post('/users/:id/favorites/:movieName', (req, res) => {
-  res.send('POST request - item successfully added to favorites list');
+//old code to be removed 
+//app.post('/users/:id/favorites/:movieName', (req, res) => {
+//  res.send('POST request - item successfully added to favorites list');
+//});
+
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $push: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //allow users to remove movie from favorite list
-app.put('/users/:id/favorites/:movieName', (req, res) => {
-  res.send('PUT request - item successfully removed from favorites list');
-});
+//old code to be removed 
+//app.put('/users/:id/favorites/:movieName', (req, res) => {
+//  res.send('PUT request - item successfully removed from favorites list');
+//});
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+}); //where should app.delete be used to remove the data about movie favorites? 
+
 
 //allow users to deregsiter
-app.delete('/users/:id/', (req, res) => {
-  res.send('DELETE request - user successfully deregistered');
+//old code to be removed 
+//app.delete('/users/:id/', (req, res) => {
+//  res.send('DELETE request - user successfully deregistered');
+//});
+
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 //Error 
