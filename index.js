@@ -1,4 +1,11 @@
-const express = require('express'),
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+mongoose.connect('mongodb://localhost:27017/MyMovieApp', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const express = require('express'), //should these lines be removed with mongoose integration? 
       fs = require("fs"),
       path = require("path"),
       morgan = require('morgan'),
