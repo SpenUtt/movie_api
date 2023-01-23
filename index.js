@@ -1,17 +1,18 @@
-const mongoose = require('mongoose');
-const Models = require('./models.js');
-
-const Movies = Models.Movie;
-const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/MyMovieApp', { useNewUrlParser: true, useUnifiedTopology: true });
-
-const express = require('express'), //should these lines be removed with mongoose integration? 
+const express = require('express'), 
       fs = require("fs"),
       path = require("path"),
       morgan = require('morgan'),
       bodyParser = require('body-parser'),
       uuid = require('uuid');
 const app = express();
+
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
+
+//mongoose.connect('mongodb://localhost:27017/MyMovieApp', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
 
 // Middlewares
 app.use(express.static('public'));
@@ -120,7 +121,6 @@ let topMovies = [
 ];
 
 let users = [
-
 ];
 
 // GET requests
@@ -139,40 +139,43 @@ app.get('/documentation', (req, res) => {
 
 //get all movies 
 app.get('/movies', (req, res) => {
-  res.status(200).json(topMovies);
+  Movies.find({}).then(movies => {
+    res.status(200).send(movies);
+  }).catch(e => {
+    console.error('Error getting movies from Database', e)
+  })
 });
 
 //Express Code
 //return data on movies by title 
-app.get('/movies/:title', (req, res) => {
+app.get('/movies/:title', async (req, res) => {
   const title = req.params.title;
-  const result = topMovies.find(m => m.title === title)
+  const result = await Movies.findOne({Title: title})
   if (result) {
     return res.status(200).send(result);
   }
-  return res.status(404).send("Movie you are looking for is not found!")
+  return res.status(404).send("The movie you are looking for is not found!")
 });
 
 //return data about genre
 app.get('/movies/genre/:genreName', (req, res) => {
   const genre = req.params.genreName;
-  const result = topMovies.filter(m => m.genre.name === genre)
-  if (result) {
-    return res.status(200).send(result);
-  }
-  return res.status(404).send("No Movies with the given genre!")
+  Movies.find({"Genre.Name": genreName}).then(movies => {
+    res.status(200).send(movies);
+  }).catch(e => {
+    console.error('Error getting movies by Genre Name from DB', e)
+  })
 });
 
 //return data about director
 app.get('/movies/director/:directorName', (req, res) => {
-  res.send('GET request - returning details on director');
+  const directorName = req.params.directorName;
+  Movies.find({"Director.Name": directorName}).then(movies => {
+    res.status(200).send(movies);
+  }).catch(e => {
+    console.error('Error getting movies by Director Name from DB', e)
+  })
 });
-
-//allow new users to register
-// commented out from previous task to transition to mongoose 
-//app.post('/users', (req, res) => {
-//  res.send('POST request - user successfully registered');
-//});
 
 //Add a user
 app.post('/users', (req, res) => {
@@ -184,7 +187,7 @@ app.post('/users', (req, res) => {
       Users
         .create({
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: req.body.Password, // TODO: We should not save password just like this, instead we should HASH**** it
           Email: req.body.Email,
           Birthday: req.body.Birthday
         })
