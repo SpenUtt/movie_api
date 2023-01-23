@@ -95,7 +95,7 @@
             
                     <tr>
                         <td>Allow users to add a movie to their list of favorites, showing only a text that a movie has been added</td>
-                        <td>/users/:id/favorites/:movieName</td>
+                        <td>/users/:id/movies/:movieName</td>
                         <td>Post</td>
                         <td>:id, :movieName</td>
                         <td>-</td>
@@ -104,8 +104,8 @@
             
                     <tr>
                         <td>Allow users to remove a movie from their list of favorites, showing only a text that a movie has been removed</td>
-                        <td>/users/:id/favorites/:movieName</td>
-                        <td>Put</td>
+                        <td>/users/:id/movies/:movieName</td>
+                        <td>Delete</td>
                         <td>:id, :movieName</td>
                         <td>-</td>
                         <td>A JSON object holding data about the user and the movie that was removed</td>

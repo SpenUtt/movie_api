@@ -23,105 +23,6 @@ app.use(morgan('common', {
 }));
 
 app.use(bodyParser.json());
-//should the following two arrays be removed? 
-let topMovies = [
-  {
-    title: 'Jurassic Park',
-    // commented section to be copied for next task 
-    //imageUrl: "https://filmspiegel-essen.de/wp-content/uploads/2020/07/JurassicPark_plakat2.jpg",
-    //description: "to be added",
-    director: {
-      name: 'Steven Spielberg',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Lord of the Rings',
-    director: {
-      name: 'Peter Jackson',
-    },
-    genre: {
-      name: 'adventure'
-    },
-  },
-  {
-    title: 'Avatar',
-    director: {
-      name: 'James Cameron',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Star Wars',
-    director: {
-      name: 'George Lucas',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'The Godfather',
-    director: {
-      name: 'Francis Ford Coppola',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'The Dark Knight',
-    director: {
-      name: 'Christopher Nolan',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Fight Club',
-    director: {
-      name: 'David Fincher',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Pulp Fiction',
-    director: {
-      name: 'Quentin Tarantino',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Psycho',
-    director: {
-      name: 'Alfred Hitchcock',
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },
-  {
-    title: 'Goodfellas',
-    director: { 
-      name: 'Martin Scorsese'
-    },
-    genre: {
-      name: 'to be added'
-    },
-  },  
-];
-
-let users = [
-];
 
 // GET requests
 // 200 - For successfull GET
@@ -159,7 +60,7 @@ app.get('/movies/:title', async (req, res) => {
 
 //return data about genre
 app.get('/movies/genre/:genreName', (req, res) => {
-  const genre = req.params.genreName;
+  const genreName = req.params.genreName;
   Movies.find({"Genre.Name": genreName}).then(movies => {
     res.status(200).send(movies);
   }).catch(e => {
@@ -229,11 +130,6 @@ app.get('/users/:Username', (req, res) => {
 });
 
 //allow users to update their user info
-// old code, to be removed? 
-//app.put('/users/:id', (req, res) => {
-//  res.send('PUT request - user info successfully updated');
-//});
-
 app.put('/users/:Username', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
@@ -254,12 +150,7 @@ app.put('/users/:Username', (req, res) => {
   });
 });
 
-//allow users to add movie to favorites 
-//old code to be removed 
-//app.post('/users/:id/favorites/:movieName', (req, res) => {
-//  res.send('POST request - item successfully added to favorites list');
-//});
-
+//allow users to add movie to favorites
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
@@ -275,12 +166,8 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 
-//allow users to remove movie from favorite list
-//old code to be removed 
-//app.put('/users/:id/favorites/:movieName', (req, res) => {
-//  res.send('PUT request - item successfully removed from favorites list');
-//});
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
+//allow users to remove movie from favorites list
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $pull: { FavoriteMovies: req.params.MovieID }
   },
@@ -293,15 +180,9 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
       res.json(updatedUser);
     }
   });
-}); //where should app.delete be used to remove the data about movie favorites? 
+}); 
 
-
-//allow users to deregsiter
-//old code to be removed 
-//app.delete('/users/:id/', (req, res) => {
-//  res.send('DELETE request - user successfully deregistered');
-//});
-
+//allow users to deregister
 app.delete('/users/:Username', (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
