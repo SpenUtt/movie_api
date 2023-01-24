@@ -11,7 +11,6 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-//mongoose.connect('mongodb://localhost:27017/MyMovieApp', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
 
 // Middlewares
@@ -23,12 +22,6 @@ app.use(morgan('common', {
 }));
 
 app.use(bodyParser.json());
-
-// GET requests
-// 200 - For successfull GET
-// 201 - For successful create/update on server
-// 404 - Not found
-// 400 - Bad request
 
 app.get('/', (req, res) => {
   res.send('Welcome to MyMovieApp!!!');
@@ -47,7 +40,6 @@ app.get('/movies', (req, res) => {
   })
 });
 
-//Express Code
 //return data on movies by title 
 app.get('/movies/:title', async (req, res) => {
   const title = req.params.title;
@@ -139,7 +131,7 @@ app.put('/users/:Username', (req, res) => {
       Birthday: req.body.Birthday
     }
   },
-  { new: true }, // This line makes sure that the updated document is returned
+  { new: true }, 
   (err, updatedUser) => {
     if(err) {
       console.error(err);
@@ -155,7 +147,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
   },
-  { new: true }, // This line makes sure that the updated document is returned
+  { new: true }, 
   (err, updatedUser) => {
     if (err) {
       console.error(err);
