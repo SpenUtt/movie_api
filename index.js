@@ -13,21 +13,19 @@ const Users = Models.User;
 
 mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
 
-// Middlewares
-app.use(express.static('public'));
-
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
-app.use(morgan('common', {
-    stream: accessLogStream
-}));
-
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
+
+// Middlewares
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
+app.use(morgan('common', {
+    stream: accessLogStream
+}));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('Welcome to MyMovieApp!!!');
