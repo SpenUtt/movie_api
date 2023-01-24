@@ -21,8 +21,8 @@ app.use(morgan('common', {
     stream: accessLogStream
 }));
 
-//app.use(bodyParser.json()); should this line be removed and replaced with the following line for task 2.9?
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // should this line be removed and replaced with the following line for task 2.9?
+//app.use(bodyParser.urlencoded({ extended: true }));
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
@@ -37,7 +37,7 @@ app.get('/documentation', (req, res) => {
 });
 
 //get all movies 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find({}).then(movies => {
     res.status(200).send(movies);
   }).catch(e => {
