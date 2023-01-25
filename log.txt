@@ -224,3 +224,8 @@
 ::1 - - [25/Jan/2023:12:42:35 +0000] "PUT /users/User6 HTTP/1.1" 401 -
 ::1 - - [25/Jan/2023:12:42:43 +0000] "POST /users/User1/movies/63ca58fc83c83b3e4d9e3f7f HTTP/1.1" 401 -
 ::1 - - [25/Jan/2023:12:42:50 +0000] "DELETE /users/User3/movies/63ca58fc83c83b3e4d9e3f7f HTTP/1.1" 401 -
+::1 - - [25/Jan/2023:14:31:33 +0000] "GET /movies HTTP/1.1" 401 -
+::1 - - [25/Jan/2023:14:31:38 +0000] "GET /movies/Jurassic%20Park HTTP/1.1" 401 -
+::1 - - [25/Jan/2023:15:15:25 +0000] "GET / HTTP/1.1" 304 -
+::1 - - [25/Jan/2023:15:15:37 +0000] "GET /movies HTTP/1.1" 401 -
+::1 - - [25/Jan/2023:15:23:31 +0000] "GET /movies HTTP/1.1" 200 7870

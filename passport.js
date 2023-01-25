@@ -2,11 +2,6 @@ const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy, 
     Models = require('./models.js'),
     passportJWT = require('passport-jwt');
-/* blocking out to keep consistent with provided code 
-const Users = Models.User; 
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
-*/
 
 let Users = Models.User, 
     JWTStrategy = passportJWT.Strategy,
@@ -24,7 +19,7 @@ passport.use(new LocalStrategy(
                 console.log(error);
                 return callback(error);
     }
-    //Why is this code here twice, with validatePassword? 
+    
     if (!user) {
         console.log('incorrect username or password');
         return callback(null, false, {
