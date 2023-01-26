@@ -12,7 +12,9 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
+//mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
