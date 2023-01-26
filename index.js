@@ -5,6 +5,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       uuid = require('uuid');
 const app = express();
+const { check, validationResult } = require('express-validator');
 module.exports = app; //exports the app to vercel
 
 const mongoose = require('mongoose');
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors');
 app.use(cors());
-const { check, validationResult } = require('express-validator');
+
 
 let auth = require('./auth')(app);
 const passport = require('passport');
