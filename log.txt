@@ -264,3 +264,5 @@
 ::1 - - [25/Jan/2023:19:59:53 +0000] "GET /movies/genre/Thriller HTTP/1.1" 200 1994
 ::1 - - [25/Jan/2023:20:00:23 +0000] "GET /movies/genre/scifi HTTP/1.1" 200 2
 ::1 - - [25/Jan/2023:20:00:34 +0000] "GET /movies/genre/Drama HTTP/1.1" 200 4098
+::1 - - [25/Jan/2023:20:04:53 +0000] "GET /movies/genre/Drama HTTP/1.1" 200 192
+::1 - - [25/Jan/2023:20:05:10 +0000] "GET /movies/director/Steven%20Spielberg HTTP/1.1" 200 120
