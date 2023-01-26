@@ -6,7 +6,6 @@ const express = require('express'),
       uuid = require('uuid');
 const app = express();
 const { check, validationResult } = require('express-validator');
-module.exports = app; //exports the app to vercel
 
 const mongoose = require('mongoose');
 const Models = require('./models.js');
