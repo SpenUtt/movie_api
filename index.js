@@ -5,6 +5,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       uuid = require('uuid');
 const app = express();
+module.exports = app; //exports the app to vercel
 
 const mongoose = require('mongoose');
 const Models = require('./models.js');
