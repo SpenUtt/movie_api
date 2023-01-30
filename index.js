@@ -12,9 +12,9 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-//mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
-mongoose.set('strictQuery', true);
-mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/MyMovieApp');
+//mongoose.set('strictQuery', true);
+//mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -81,7 +81,7 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
 });
 
 //Add a user
-app.post('/users', passport.authenticate('jwt', { session: false }),
+app.post('/users',
     [
       check('Username', 'Username is required').isLength({min: 5}),
       check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
