@@ -4,6 +4,13 @@ const jwt = require('jsonwebtoken'),
 
 require('./passport'); 
 
+/**
+ * This function creates JWT based on username and password
+ * @function generateJWTToken
+ * @param {object} user - received after checking the user exists in database
+ * @returns @user object, JWT, and additional info on token
+ */
+
 let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
         subject: user.Username, 

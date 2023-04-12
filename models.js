@@ -24,9 +24,22 @@ let userSchema = mongoose.Schema({
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
+/**
+ * This function creates JWT based on username and password
+ * @function hashPassword
+ * @param {string} password - receives naked password
+ * @returns @password string, return hashedPassword
+ */
 userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };
+
+/**
+ * This function creates JWT based on username and password
+ * @function validatePassword
+ * @param {string} password - receives hashed password
+ * @returns @password string, compares and returns validatePassword
+ */
 
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.Password);

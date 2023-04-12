@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "doc": "jsdoc -c jsdoc-config.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "jsdoc": "^4.0.2",
+    "nodemon": "^2.0.20",
+    "typedoc": "^0.23.28"
   }
 }
