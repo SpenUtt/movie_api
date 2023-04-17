@@ -3,7 +3,13 @@
 ##  Project Overview
 - This project is the server-side component of a movies web application called "myMovieApp". The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
-- The server-side of the application will be built using JavaScript, Node.js, Express, and MongoDB. It will consist of a well-designed REST API and an architected database. Users of myMovieApp will be able to access the application whenever they like to read information about different movies or update their user information, for instance, their list of "Favorite Movies."
+- The server-side of the application is built using: 
+1. JavaScript 
+2. Node.js
+3. Express
+4. MongoDB. 
+
+It consists of a well-designed REST API and an architected database. Users of myMovieApp will be able to access the application whenever they like to read information about different movies or update their user information, for instance, their list of "Favorite Movies."
 
 ### Essential Features
 1. Return a list of ALL movies to the user
@@ -17,7 +23,7 @@
 9. Allow existing users to deregister
 
 ### Get Started
-- To get started with this movie API, you will need to have Node.js and MongoDB installed on your machine. Once you have those installed, you can clone this repository to your local machine and run 'npm install'.
+- To get started with this movie API, you will need to have Node.js and MongoDB installed on your machine. Once you have those installed, you can clone this repository (https://github.com/SpenUtt/movie_api.git) to your local machine and run 'npm install'.
 - Finally, you can start the server by running the following command 'npm start'.
 The server will start on port 8080 by default. You can now send HTTP requests to the API's URL endpoints using a tool like Postman. Refer to the API documentation '/' for information on how to use the endpoints.
 
